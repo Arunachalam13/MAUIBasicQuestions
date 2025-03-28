@@ -20,6 +20,44 @@ Each control has a default binding mode.
 ### OneWayToSource Binding
 Read-only bindable properties default to **OneWayToSource**, where data flows from **View → ViewModel**. Example: `SelectedItem` in `ListView` updates the binding source when the selection changes.
 
+## String Formatting in Data Binding
+String formatting in .NET MAUI data binding allows formatting bound values directly in XAML using the `StringFormat` property.
+
+**Example:**
+```xml
+<Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
+```
+This formats the `Price` property as a currency value.
+
+## Bindings with a Binding Context
+The `BindingContext` defines the data source for bindings in a view. Setting the `BindingContext` allows UI elements to access properties in the ViewModel.
+
+**Example:**
+```csharp
+public partial class MainPage : ContentPage
+{
+    public MainPage()
+    {
+        InitializeComponent();
+        BindingContext = new MainViewModel();
+    }
+}
+```
+Here, `MainViewModel` is set as the `BindingContext`, making its properties available for data binding in XAML.
+
+## Bindings in XAML vs. C# (SetBinding)
+
+### XAML Binding Example:
+```xml
+<Label Text="{Binding Name}" />
+```
+This binds the `Text` property of the `Label` to the `Name` property of the ViewModel.
+
+### C# SetBinding Example:
+```csharp
+var label = new Label();
+label.SetBinding(Label.TextProperty, "Name");
+
 ## MVVM Pattern in .NET MAUI
 MVVM (Model-View-ViewModel) is an architectural pattern that separates UI logic from business logic.
 
